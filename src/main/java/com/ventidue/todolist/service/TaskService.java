@@ -37,7 +37,6 @@ public class TaskService {
         taskDTO.setDescription(task.getDescription());
         return taskDTO;
     }
-
     public TaskDTO createTask(TaskDTO taskDTO) {
         if (taskDTO == null) {
             throw new IllegalArgumentException("A Task não pode ser nula.");
