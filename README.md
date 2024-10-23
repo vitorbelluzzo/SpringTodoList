@@ -30,10 +30,6 @@ Este é um projeto de Todo List para gerenciamento de tarefas, com funcionalidad
 - **PUT /tasks/{id}**: Atualiza uma tarefa existente.
 - **DELETE /tasks/{id}**: Remove uma tarefa.
 
-## Melhorias Futuras
-- Adicionar autenticação de usuários.
-- Implementar uma interface gráfica com React ou Angular.
-- Suporte a diferentes prioridades nas tarefas.
 
 ## Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
