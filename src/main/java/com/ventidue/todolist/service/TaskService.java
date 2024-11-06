@@ -39,13 +39,20 @@ public class TaskService {
     }
     public TaskDTO createTask(TaskDTO taskDTO) {
         if (taskDTO == null) {
-            throw new IllegalArgumentException("A Task não pode ser nula.");
+            throw new IllegalArgumentException("A Task não pode estar vazia.");
         }
         Task task = convertToEntity(taskDTO);
         task.setCreateAt(LocalDateTime.now());
         task.setCompleted(false);
         Task taskSaved = taskRepository.save(task);
         return convertToDTO(taskSaved);
+    }
+
+    public List<TaskDTO> findCompletedTasks() {
+        return taskRepository.findByCompleted(true)
+                .stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     public List<TaskDTO> findAllTasks() {
@@ -55,15 +62,8 @@ public class TaskService {
                 .collect(Collectors.toList());
     }
 
-    public List<TaskDTO> findCompletedTasks(TaskDTO taskCompleted) {
-        return taskRepository.findByCompleted(taskCompleted.getCompleted())
-                .stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
     public Task findTaskById(Long id) {
-        return taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException("Task com o id" + id + "não encontrada;"));
+        return taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException("Task com o id " + id + " não encontrada;"));
     }
 
     public TaskDTO updateTask(Long id, TaskDTO taskDTO) {

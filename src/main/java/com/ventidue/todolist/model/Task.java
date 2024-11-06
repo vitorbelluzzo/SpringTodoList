@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Getter
@@ -17,7 +18,7 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Long Id;
+    private Long id;
     @Column(nullable = false, unique = true)
     private String description;
     @Column(nullable = false)
@@ -25,6 +26,15 @@ public class Task {
     private LocalDateTime createAt;
     private LocalDateTime updatedAt;
 
-
-
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        return "{" +
+                "\"completed\":" + completed +
+                ", \"createAt\":\"" + (createAt != null ? createAt.format(formatter) : null) + "\"" +
+                ", \"description\":\"" + description + "\"" +
+                ", \"id\":" + id +
+                ", \"updatedAt\":\"" + (updatedAt != null ? updatedAt.format(formatter) : null) + "\"" +
+                '}';
+    }
 }
